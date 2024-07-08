@@ -1,0 +1,35 @@
+@media screen and (max-width: 500px) {
+    .main-header{
+        height: 60px;
+    }
+    .box {
+        display: none;
+    }
+    .logo-container {
+        margin-left: 0;
+        margin-top: 0;
+    }
+    .logout-btn {
+        margin-right: 20px;
+    }
+    .box-main{
+        width: 90%;
+        left: 50%;
+        top: 60%;
+        height: 70%;
+        padding-bottom: 66%;
+    }
+    .box-footer{
+        height: 64px;
+    }
+
+    .box-footer-input{
+        margin: 7px 0;
+        width: 100%;
+        right: 0;
+    }
+    .box-footer-input button{
+        right: 1rem
+    }
+
+}

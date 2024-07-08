@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;400&display=swap" rel="stylesheet">
+
+    
+
+    <title>Document</title>
+</head>
+<body class="background">
+    <div id="username_avatar" data-username="{{ current_user.username }}"></div>
+    <header class="main-header background">
+        <div class="logo-container">
+            <img src="/static/images/chatbot.png" alt="Logo_chatbot">
+            <span>ChatBot 3.5</span>
+        </div>
+        <div class="logout">
+            <a class="logout-btn" href="{{url_for('logout_page')}}">
+                    Logout
+            </a>
+        </div>
+    </header>
+
+    <main class="contain">
+        <div class="box">
+            <div class="cricle">
+                <h1>{{ current_user.username[0] if current_user.username else '' }}</h1>
+            </div>
+            <div class="name">
+                <h2>{{current_user.username}}</h2>
+            </div>
+            <div class="introduce">
+                <h4>Welcome to our world, where chatbots 
+                    will be the perfect companion, 
+                    ready to listen and support whenever you need it.</h4>
+            </div>
+            <div class="clean-btn">
+                <button id="cleanButton">
+                    Clean
+                </button>
+            </div>
+        </div>
+        <div class="box-main" id="chatbox">
+
+            {% if messages %}
+                {% for message in messages %}
+                {% if message.content_user and message.content_chatbot %}
+                {% for i in range(message.content_user.split('/')|length) %}
+                <div class="message user-message ">
+                    <div class="box-avatar">
+                        <div class="cricle-avarta">
+                            <h5>{{ current_user.username[0] if current_user.username else '' }}</h5>
+                        </div>
+                    </div>
+                    <p>{{ message.content_user.split('/')[i] }}</p>
+                </div>
+                    
+                
+                <div class="message chatbot-message ">
+                    <div class="icon-chatbot">
+                        <img class="icon-chatbot-img" src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png">
+                    </div>
+                    <p>{{ message.content_chatbot.split('/')[i] }}</p>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endfor %}
+            {% endif %}
+
+                    
+           
+        </div>
+
+
+        
+    </main>
+    <footer class="box-footer background">
+        <form id="messageForm" action="{{url_for('home_page')}}" method="POST" >
+            <div class="box-footer-input">
+                <input type="text" name="text" id="text" autocomplete="off"  required>
+                <button type="submit" id="sendMessage" >
+                    <span class="icon"><ion-icon name="send"></ion-icon></span>
+                </button>
+            </div>
+        </form>
+    </footer>
+        
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src = "{{ url_for('static', filename='javascript/main.js') }}" ></script>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
+</body>
+</html>
